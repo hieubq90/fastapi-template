@@ -1,8 +1,8 @@
 from typing import List, Optional, TYPE_CHECKING
-import uuid
+from sqlalchemy import Column, String
 
 from sqlmodel import Field, Relationship, SQLModel
-from src.base_model import Base
+from src.base_model import Base, default_uuid
 
 if TYPE_CHECKING:
     from src.hero.models import Hero, HeroRead
@@ -23,11 +23,11 @@ class TeamCreate(TeamBase):
 
 
 class TeamRead(TeamBase):
-    id: uuid.UUID
+    id: str
 
 
 class TeamUpdate(SQLModel):
-    id: Optional[uuid.UUID] = None
+    id: Optional[str] = None
     name: Optional[str] = None
     headquarters: Optional[str] = None
 

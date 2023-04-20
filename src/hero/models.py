@@ -1,9 +1,7 @@
 from typing import Optional, TYPE_CHECKING
-import uuid
-
+from sqlalchemy import Column, String
 from sqlmodel import Field, Relationship, SQLModel
-
-from src.base_model import Base
+from src.base_model import Base, default_uuid
 
 if TYPE_CHECKING:
     from src.team.models import Team, TeamRead
@@ -14,7 +12,7 @@ class HeroBase(SQLModel):
     secret_name: str
     age: Optional[int] = Field(default=None, index=True)
 
-    team_id: Optional[uuid.UUID] = Field(default=None, foreign_key="teams.id")
+    team_id: Optional[str] = Field(default=None, foreign_key="teams.id")
 
 
 class Hero(Base, HeroBase, table=True):
@@ -23,7 +21,7 @@ class Hero(Base, HeroBase, table=True):
 
 
 class HeroRead(HeroBase):
-    id: uuid.UUID
+    id: str
 
 
 class HeroCreate(HeroBase):
@@ -34,7 +32,7 @@ class HeroUpdate(SQLModel):
     name: Optional[str] = None
     secret_name: Optional[str] = None
     age: Optional[int] = None
-    team_id: Optional[uuid.UUID] = None
+    team_id: Optional[str] = None
 
 
 class HeroReadWithTeam(HeroRead):
