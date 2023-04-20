@@ -1,10 +1,16 @@
+import sys
+from os.path import abspath, dirname
+
+sys.path.insert(0, dirname(dirname(abspath(__file__))))  # Insert <.>/src
+
+
 from logging.config import fileConfig
 
 from alembic import context
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
-from src.database import metadata, DATABASE_URL
+from src.models import Base
 
 
 # this is the Alembic Config object, which provides
@@ -20,15 +26,16 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = metadata
+target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
-config.set_main_option("sqlalchemy.url", DATABASE_URL)
-config.compare_type = True
-config.compare_server_default = True
+
+# config.set_main_option("sqlalchemy.url", DATABASE_URL)
+# config.compare_type = True
+# config.compare_server_default = True
 
 
 def run_migrations_offline() -> None:

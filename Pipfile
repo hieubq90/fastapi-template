@@ -1,12 +1,21 @@
 [[source]]
 url = "https://pypi.org/simple"
-verify_ssl = false
+verify_ssl = true
 name = "pypi"
 
 [packages]
+fastapi = "0.95.1"
+uvicorn = {extras = ["standard"], version = "*"}
+fastapi-crudrouter = {editable = true, git = "https://github.com/hieubq90/fastapi-crudrouter"}
+sqlalchemy = "*"
+alembic = "*"
+pytz = "*"
+sqlmodel = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
+black = "*"
 
 [requires]
-python_version = "3.9"
-python_full_version = "3.9.16"
+python_version = "3.10"
+python_full_version = "3.10.6"
