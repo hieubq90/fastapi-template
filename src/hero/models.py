@@ -3,8 +3,8 @@ from sqlalchemy import Column, String
 from sqlmodel import Field, Relationship, SQLModel
 from src.base_model import Base, default_uuid
 
-if TYPE_CHECKING:
-    from src.team.models import Team, TeamRead
+# if TYPE_CHECKING:
+from src.team.models import Team
 
 
 class HeroBase(SQLModel):
@@ -13,15 +13,15 @@ class HeroBase(SQLModel):
     age: Optional[int] = Field(default=None, index=True)
 
     team_id: Optional[str] = Field(default=None, foreign_key="teams.id")
+    
+    class Config:
+        orm_mode = True
 
 
 class Hero(Base, HeroBase, table=True):
     __tablename__ = "heroes"
-    team: Optional["Team"] = Relationship(back_populates="heroes")
-
-
-class HeroRead(HeroBase):
-    id: str
+    
+    team: Optional[Team] = Relationship(back_populates="heroes")
 
 
 class HeroCreate(HeroBase):
@@ -34,6 +34,3 @@ class HeroUpdate(SQLModel):
     age: Optional[int] = None
     team_id: Optional[str] = None
 
-
-class HeroReadWithTeam(HeroRead):
-    team: Optional["TeamRead"] = None
