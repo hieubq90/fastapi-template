@@ -4,9 +4,7 @@ from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
 # from src import redis
-from src.demo.router import router as demo_router
-from src.team.router import router as team_router
-from src.hero.router import router as hero_router
+from src.app.routes import init_routes
 from src.config import app_configs, settings
 
 app = FastAPI(**app_configs)
@@ -47,6 +45,4 @@ async def healthcheck() -> dict[str, str]:
     return {"status": "ok"}
 
 
-app.include_router(demo_router, prefix="", tags=["Demo"])
-app.include_router(team_router, prefix="", tags=["Teams"])
-app.include_router(hero_router, prefix="", tags=["Heroes"])
+init_routes(app)

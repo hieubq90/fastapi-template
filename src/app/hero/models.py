@@ -1,10 +1,9 @@
 from typing import Optional, TYPE_CHECKING
-from sqlalchemy import Column, String
 from sqlmodel import Field, Relationship, SQLModel
-from src.base_model import Base, default_uuid
+from src.models.base_model import Base
 
-# if TYPE_CHECKING:
-from src.team.models import Team
+if TYPE_CHECKING:
+    from src.app.team.models import Team
 
 
 class HeroBase(SQLModel):
@@ -13,15 +12,15 @@ class HeroBase(SQLModel):
     age: Optional[int] = Field(default=None, index=True)
 
     team_id: Optional[str] = Field(default=None, foreign_key="teams.id")
-    
+
     class Config:
         orm_mode = True
 
 
 class Hero(Base, HeroBase, table=True):
     __tablename__ = "heroes"
-    
-    team: Optional[Team] = Relationship(back_populates="heroes")
+
+    team: Optional["Team"] = Relationship(back_populates="heroes")
 
 
 class HeroCreate(HeroBase):
@@ -33,4 +32,3 @@ class HeroUpdate(SQLModel):
     secret_name: Optional[str] = None
     age: Optional[int] = None
     team_id: Optional[str] = None
-

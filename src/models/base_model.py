@@ -10,9 +10,8 @@ from sqlalchemy import (
     Boolean,
     event,
 )
-from sqlalchemy.dialects.postgresql import UUID
 from sqlmodel import Field, SQLModel
-from src.helpers import now_timestamp
+from src.helpers.helpers import now_timestamp
 
 # from src.database import metadata
 
@@ -104,7 +103,7 @@ def on_before_update_event(mapper, connection, instance):
     if not instance.deleted:
         timestamp = now_timestamp()
         instance.updated_at = timestamp
-        
+
     if instance.deleted is True:
         instance.deleted_at = timestamp
 

@@ -1,9 +1,9 @@
 from fastapi import APIRouter
 from fastapi_crudrouter import SQLAlchemyCRUDRouter
-from src.database import get_db
+from src.database.database import get_db
 
-from src.team.models import Team, TeamCreate, TeamUpdate
-from src.models import TeamRead
+from src.app.team.models import Team, TeamCreate, TeamUpdate
+from src.models.models import TeamRead
 
 router = APIRouter()
 

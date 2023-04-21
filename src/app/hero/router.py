@@ -1,9 +1,9 @@
 from fastapi import APIRouter
 from fastapi_crudrouter import SQLAlchemyCRUDRouter
-from src.database import get_db
+from src.database.database import get_db
 
-from src.hero.models import Hero, HeroCreate, HeroUpdate
-from src.models import HeroRead
+from src.app.hero.models import Hero, HeroCreate, HeroUpdate
+from src.models.models import HeroRead
 
 router = APIRouter()
 

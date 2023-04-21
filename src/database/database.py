@@ -4,16 +4,12 @@ from sqlalchemy import (
     create_engine,
 )
 from sqlalchemy.orm import sessionmaker
-from sqlmodel import SQLModel, MetaData
 from src.config import settings
-from src.constants import DB_NAMING_CONVENTION
 
 
 DATABASE_URL = settings.DATABASE_URL
 
 engine = create_engine(DATABASE_URL)
-# metadata = SQLModel.metdata
-# metadata = MetaData(naming_convention=DB_NAMING_CONVENTION)
 
 
 # Re-use database engine
