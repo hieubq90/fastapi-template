@@ -1,4 +1,5 @@
 from typing import Optional, TYPE_CHECKING
+from sqlalchemy import Column, String
 from sqlmodel import Field, Relationship, SQLModel
 from src.models.base_model import Base
 
@@ -21,6 +22,10 @@ class Hero(Base, HeroBase, table=True):
     __tablename__ = "heroes"
 
     team: Optional["Team"] = Relationship(back_populates="heroes")
+
+
+class HeroRead(HeroBase):
+    id: str
 
 
 class HeroCreate(HeroBase):

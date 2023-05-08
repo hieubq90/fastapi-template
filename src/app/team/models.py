@@ -20,6 +20,10 @@ class Team(Base, TeamBase, table=True):
     heroes: List["Hero"] = Relationship(back_populates="team")
 
 
+class TeamRead(TeamBase):
+    id: str
+
+
 class TeamCreate(TeamBase):
     pass
 

@@ -4,8 +4,8 @@ from typing import List, Optional
 from src.models.base_model import Base
 
 from src.app.demo.models import Demo
-from src.app.team.models import Team, TeamBase
-from src.app.hero.models import Hero, HeroBase
+from src.app.team.models import Team, TeamBase, TeamRead
+from src.app.hero.models import Hero, HeroBase, HeroRead
 
 
 # -------------------------------------------
@@ -13,19 +13,19 @@ from src.app.hero.models import Hero, HeroBase
 # -------------------------------------------
 
 
-class TeamRead(TeamBase):
+class TeamWithHeroes(TeamBase):
     id: str
 
-    heroes: List[Hero] = []
+    heroes: List[HeroRead] = []
 
 
-TeamRead.update_forward_refs()
+TeamWithHeroes.update_forward_refs()
 
 
-class HeroRead(HeroBase):
+class HeroDetail(HeroBase):
     id: str
 
-    team: Optional[Team] = None
+    team: Optional[TeamRead] = None
 
 
-HeroRead.update_forward_refs()
+HeroDetail.update_forward_refs()
